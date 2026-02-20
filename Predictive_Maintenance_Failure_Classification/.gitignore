@@ -87,3 +87,8 @@ data/raw/*
 
 # Mypy cache
 .mypy_cache/
+
+data/
+*.csv
+__pycache__/
+.venv/

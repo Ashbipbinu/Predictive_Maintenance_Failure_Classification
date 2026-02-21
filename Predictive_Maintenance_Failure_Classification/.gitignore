@@ -1,13 +1,16 @@
-# Byte-compiled / optimized / DLL files
+# ==============================================================================
+# MLOPS PROJECT .GITIGNORE
+# ==============================================================================
+
+# --- Python & Environment ---
 __pycache__/
 *.py[cod]
-
-# C extensions
+*$py.class
 *.so
-
-# Distribution / packaging
 .Python
 env/
+venv/
+.venv/
 build/
 develop-eggs/
 dist/
@@ -22,73 +25,58 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.mypy_cache/
+.pytest_cache/
+.hypothesis/
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# DotEnv configuration
-.env
-
-# Database
-*.db
-*.rdb
-
-# Pycharm
-.idea
-
-# VS Code
-.vscode/
-
-# Spyder
-.spyproject/
-
-# Jupyter NB Checkpoints
+# --- Jupyter Notebooks ---
 .ipynb_checkpoints/
+*/.ipynb_checkpoints/*
 
-# exclude data from source control by default
-data/raw/*
-!data/raw/*.dvc
-# Mac OS-specific storage files
+# --- Editor & OS Specific ---
+.idea/
+.vscode/
+.spyproject/
 .DS_Store
-
-# vim
+Thumbs.db
 *.swp
 *.swo
 
-# Mypy cache
-.mypy_cache/
+# --- Logs & Databases ---
+*.log
+*.db
+*.rdb
+pip-log.txt
+pip-delete-this-directory.txt
 
-data/
-*.csv
-__pycache__/
-.venv/
+# --- Environment Variables (Secrets) ---
+.env
+.flaskenv
+
+# ==============================================================================
+# DATA VERSION CONTROL (DVC) CONFIGURATION
+# ==============================================================================
+
+# 1. Ignore ALL actual data files/folders
+data/raw/
+data/interim/
+data/processed/
+data/external/
+
+# 2. Ignore any direct CSV/Parquet/Zip files in the data root
+data/*.csv
+data/*.parquet
+data/*.zip
+data/*.gz
+
+# 3. DO NOT ignore DVC metadata files (the pointers)
+# This allows Git to track the "version" without tracking the "bytes"
+!data/**/*.dvc
+!.dvc/
+!dvc.yaml
+!dvc.lock
+
+# 4. Ignore DVC's internal local cache and user-specific config
+.dvc/cache
+.dvc/tmp
+.dvc/config.local

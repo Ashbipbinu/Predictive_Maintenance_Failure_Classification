@@ -1,0 +1,85 @@
+# ==============================================================================
+# MLOPS PROJECT .GITIGNORE
+# ==============================================================================
+
+# --- Python & Environment ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+.mypy_cache/
+.pytest_cache/
+.hypothesis/
+.gdrive-key.json.json
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# --- Editor & OS Specific ---
+.idea/
+.vscode/
+.spyproject/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# --- Logs & Databases ---
+*.log
+*.db
+*.rdb
+pip-log.txt
+pip-delete-this-directory.txt
+
+# --- Environment Variables (Secrets) ---
+.env
+.flaskenv
+
+# ==============================================================================
+# DATA VERSION CONTROL (DVC) CONFIGURATION
+# ==============================================================================
+
+# 1. Ignore ALL actual data files/folders
+data/raw/
+data/interim/
+data/processed/
+data/external/
+
+# 2. Ignore any direct CSV/Parquet/Zip files in the data root
+data/*.csv
+data/*.parquet
+data/*.zip
+data/*.gz
+
+# 3. DO NOT ignore DVC metadata files (the pointers)
+# This allows Git to track the "version" without tracking the "bytes"
+!data/**/*.dvc
+!.dvc/
+!dvc.yaml
+!dvc.lock
+
+# 4. Ignore DVC's internal local cache and user-specific config
+.dvc/cache
+.dvc/tmp
+.dvc/config.local
+
+gdrive-key.json.json

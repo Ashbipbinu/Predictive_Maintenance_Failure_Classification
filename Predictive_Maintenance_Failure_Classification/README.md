@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Predictive_Maintenance
 ==============================
 
@@ -56,6 +55,3 @@ Project Organization
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
-=======
-# Predictive_Maintenance_Failure_Classification
->>>>>>> 23777f889ef7cf04f1300ca721b5b73b3289602b

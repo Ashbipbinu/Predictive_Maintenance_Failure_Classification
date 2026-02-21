@@ -1,7 +1,8 @@
 stages:
-  data_collection:
-    cmd: python src/data/data_collection.py
+  data_preprocessing:
+    cmd: python -m src.data.data_preprocessing
     deps:
-    - src/data/data_collection.py
+    - data/raw/predictive_maintenance.csv
+    - src/data/data_preprocessing.py
     outs:
-    - ../data/raw
+    - data/interim/cleaned_df.csv

@@ -28,6 +28,7 @@ var/
 .mypy_cache/
 .pytest_cache/
 .hypothesis/
+.gdrive-key.json.json
 
 # --- Jupyter Notebooks ---
 .ipynb_checkpoints/
@@ -80,3 +81,5 @@ data/*.gz
 .dvc/cache
 .dvc/tmp
 .dvc/config.local
+
+gdrive-key.json.json

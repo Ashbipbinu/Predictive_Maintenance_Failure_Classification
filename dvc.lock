@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  data_preprocessing:
+    cmd: python -m src.data.data_preprocessing
+    deps:
+    - path: data/raw/predictive_maintenance.csv
+      hash: md5
+      md5: ccabaa16b0db4b688cd9f38c54ba3d26
+      size: 531014
+    - path: src/data/data_preprocessing.py
+      hash: md5
+      md5: 52090ac905e29e11223513d4d671edf7
+      size: 2715
+    outs:
+    - path: data/interim/cleaned_df.csv
+      hash: md5
+      md5: 5ee5b267a0a7100c6b098a03e5ff30b8
+      size: 5311405

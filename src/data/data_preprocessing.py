@@ -6,7 +6,7 @@ from src.utensil.handle_imbalance import handle_imbalance
 from src.utensil.save_file import save_file
 
 
-def data_load_preprocessing(file_name: str):
+def data_load_preprocessing(file_name: str) -> pd.DataFrame:
 
     if not os.path.exists:
         print(f"Failed: file does not found at location {file_name} ")
@@ -59,8 +59,7 @@ def data_load_preprocessing(file_name: str):
 
         if is_Target_imbalanced or is_Failure_Type_imbalanced:
             balanced_df = handle_imbalance(df)
-        
-        print(balanced_df.dtypes)
+    
 
     return balanced_df
 
@@ -72,4 +71,4 @@ df_cleaned = data_load_preprocessing(file_name)
 
 # Saving the file to data/interim 
 file_path = os.path.join(directory, 'data', 'interim', 'cleaned_df.csv')
-save_file(directory, df_cleaned)
+save_file(file_path, df_cleaned)

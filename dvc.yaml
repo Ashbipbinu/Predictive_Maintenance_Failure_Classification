@@ -6,3 +6,11 @@ stages:
     - src/data/data_preprocessing.py
     outs:
     - data/interim/cleaned_df.csv
+  data_processing:
+    cmd: python -m src.features.build_features
+    deps:
+    - data/interim/cleaned_df.csv
+    - src/features/build_features.py
+    outs:
+    - data/processed/test_data_processed.csv
+    - data/processed/train_data_processed.csv

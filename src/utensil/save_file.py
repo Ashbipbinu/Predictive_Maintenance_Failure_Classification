@@ -1,6 +1,8 @@
 import os
 
-def save_file(file_path, df):
+def save_file(base_dir, df):
+    
+    file_path = os.path.join(base_dir, 'data', 'interim', 'cleaned_df.csv')
     
     # Extract ONLY the folder path ('data/interim')
     folder_path = os.path.dirname(file_path)

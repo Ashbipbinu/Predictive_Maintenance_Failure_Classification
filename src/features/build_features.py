@@ -51,7 +51,6 @@ def built_features() -> pd.DataFrame:
     print("Saved processed files successfully")
 
     return train_data, test_data
-if __name__ == "__main__":
-    df = built_features()
 
-    print(df)
+if __name__ == "__main__":
+    built_features()

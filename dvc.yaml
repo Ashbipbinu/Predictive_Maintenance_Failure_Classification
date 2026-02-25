@@ -12,5 +12,5 @@ stages:
     - data/interim/cleaned_df.csv
     - src/features/build_features.py
     outs:
-    - data/processed/test_data_processed.csv
-    - data/processed/train_data_processed.csv
+    - data/processed/train_processed.csv
+    - data/processed/test_processed.csv

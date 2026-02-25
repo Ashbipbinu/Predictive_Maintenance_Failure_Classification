@@ -25,14 +25,14 @@ stages:
       size: 5311405
     - path: src/features/build_features.py
       hash: md5
-      md5: a588ac1b72aa5eb5fd89cc4f6b5cd90f
-      size: 1951
+      md5: 66bc98fc51b6e6698c5935bfc75f968c
+      size: 1585
     outs:
-    - path: data/processed/test_data_processed.csv
+    - path: data/processed/test_processed.csv
       hash: md5
-      md5: cec579ffd8f728dfc01ecf12db0ad925
-      size: 1655664
-    - path: data/processed/train_data_processed.csv
+      md5: 66cc4bdb6cad35a8d6dfaeec27c73f50
+      size: 866263
+    - path: data/processed/train_processed.csv
       hash: md5
-      md5: 9c71af9bb3c818c4a2520c59b94766b9
-      size: 6716444
+      md5: a3da0f9c1c8c2cf8d93ba0276716a619
+      size: 3464967

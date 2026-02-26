@@ -13,7 +13,7 @@ def handle_scale(data: pd.DataFrame, is_train: bool) -> pd.DataFrame:
 
         # Saving the scale
         dir = os.getcwd()
-        folder = os.path.join(dir, 'src', "models")
+        folder = os.path.join(dir, "models")
         os.makedirs(folder, exist_ok=True)
         file_name = os.path.join(folder, "scale.pkl")
 
@@ -22,7 +22,7 @@ def handle_scale(data: pd.DataFrame, is_train: bool) -> pd.DataFrame:
 
         return train_scale
 
-    with open("src/models/scale.pkl", "rb") as file:
+    with open("models/scale.pkl", "rb") as file:
         scale = pickle.load(file)
         test_scale = scale.transform(data)
         return test_scale

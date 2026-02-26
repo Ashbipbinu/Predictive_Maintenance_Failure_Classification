@@ -10,7 +10,7 @@ def handle_target_encodings(y2_data: pd.DataFrame) -> pd.DataFrame:
 
    # Saving the label encoder
    dir = os.getcwd()
-   folder = os.path.join(dir, 'src', 'models')
+   folder = os.path.join(dir, 'models')
    os.makedirs(folder, exist_ok=True)
    file = os.path.join(folder, 'target_encoder.pkl')
    

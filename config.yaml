@@ -1,0 +1,5 @@
+data:
+  raw_df: H:\Predictive_Classification\data\raw\predictive_maintenance.csv
+  cleaned_df: H:\Predictive_Classification\data\interim\cleaned_df.csv
+  test_data: H:\Predictive_Classification\data\processed\test_processed.csv
+  train_data: H:\Predictive_Classification\data\processed\train_processed.csv

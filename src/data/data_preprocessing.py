@@ -4,11 +4,12 @@ import os
 from src.utensil.check_class_imabalance import check_class_imbalance
 from src.utensil.handle_imbalance import handle_imbalance
 from src.utensil.save_file import save_file
+from src.utensil.save_location_config import save_location_config
 
 
 def data_load_preprocessing(file_name: str) -> pd.DataFrame:
 
-    if not os.path.exists:
+    if not os.path.exists(file_name):
         print(f"Failed: file does not found at location {file_name} ")
         return None
 
@@ -48,6 +49,7 @@ def data_load_preprocessing(file_name: str) -> pd.DataFrame:
             "Tool wear [min]",
             "Failure Type",
         ]
+
         # Removing [] brackets and return only charaters
         cleaned_columns = [col.replace("[", "").replace("]", "") for col in df.columns]
         cleaned_columns = [col.replace(" ", "_").lower() for col in cleaned_columns]
@@ -59,16 +61,25 @@ def data_load_preprocessing(file_name: str) -> pd.DataFrame:
 
         if is_Target_imbalanced or is_Failure_Type_imbalanced:
             balanced_df = handle_imbalance(df)
+        return balanced_df
+
+
+    else:
+        return None
+
+if __name__ == '__main__':
     
+    # Fetching the data from the data/raw for preprocessing
+    directory = os.getcwd()
+    raw_data_file_path = os.path.join(directory, r"data\raw\predictive_maintenance.csv")
+    df_cleaned = data_load_preprocessing(raw_data_file_path)
 
-    return balanced_df
+    print('df_cleaned', df_cleaned.head())
+    
+    # Saving the file to data/interim 
+    clean_df_file_path = os.path.join(directory, 'data', 'interim', 'cleaned_df.csv')
+    save_file(clean_df_file_path, df_cleaned)
 
-
-# Fetching the data from the data/raw for preprocessing
-directory = os.getcwd()
-file_name = os.path.join(directory, r"data\raw\predictive_maintenance.csv")
-df_cleaned = data_load_preprocessing(file_name)
-
-# Saving the file to data/interim 
-file_path = os.path.join(directory, 'data', 'interim', 'cleaned_df.csv')
-save_file(file_path, df_cleaned)
+    # Saving the path in the config.yaml file - for cleaned and raw data
+    save_location_config(target_loc='data', key_name='raw_df', file_path=raw_data_file_path)
+    save_location_config(target_loc='data', key_name='cleaned_df', file_path=clean_df_file_path)

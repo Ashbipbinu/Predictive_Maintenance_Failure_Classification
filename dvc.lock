@@ -9,8 +9,8 @@ stages:
       size: 531014
     - path: src/data/data_preprocessing.py
       hash: md5
-      md5: e721d8912ee4c4225cf11bfdf01117ca
-      size: 2861
+      md5: 8776368e70cbf72e78aead904340a580
+      size: 3387
     outs:
     - path: data/interim/cleaned_df.csv
       hash: md5
@@ -25,14 +25,14 @@ stages:
       size: 5311405
     - path: src/features/build_features.py
       hash: md5
-      md5: 66bc98fc51b6e6698c5935bfc75f968c
-      size: 1585
+      md5: e38a5d2cc324c0be06afd613639fca34
+      size: 2294
     outs:
     - path: data/processed/test_processed.csv
       hash: md5
-      md5: 66cc4bdb6cad35a8d6dfaeec27c73f50
-      size: 866263
+      md5: dd3dd3cdd170f09873a8a2911b6049c5
+      size: 886994
     - path: data/processed/train_processed.csv
       hash: md5
-      md5: a3da0f9c1c8c2cf8d93ba0276716a619
-      size: 3464967
+      md5: 7c4284f31f2c9183cd12e4f45649dae7
+      size: 3547056

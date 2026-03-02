@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/534566108523991149/b145e366c8e04b10b339233f79f3eb9c/artifacts
+deleted_time: 1772451006114
+end_time: 1772447928715
+entry_point_name: ''
+experiment_id: '534566108523991149'
+lifecycle_stage: deleted
+run_id: b145e366c8e04b10b339233f79f3eb9c
+run_name: Trial_lasso_binary
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1772447916020
+status: 4
+tags: []
+user_id: LENOVO

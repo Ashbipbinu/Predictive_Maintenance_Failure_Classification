@@ -80,3 +80,4 @@ data/*.gz
 .dvc/cache
 .dvc/tmp
 .dvc/config.local
+/model

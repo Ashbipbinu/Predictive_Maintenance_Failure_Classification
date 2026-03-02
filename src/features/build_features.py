@@ -6,13 +6,13 @@ from src.utensil.handle_encodings import handle_target_encodings
 from src.utensil.save_file import save_file
 from src.utensil.handle_data_split import handle_data_split
 from src.utensil.save_location_config import save_location_config
+from src.utensil.load_config import load_config
 
 def built_features() -> pd.DataFrame:
 
-    with open('config.yaml', 'r') as file:
-        config = yaml.safe_load(file) 
-        clean_df_file_path = config['data']['cleaned_df']
-    
+    config = load_config('config.yaml')
+    clean_df_file_path = config['data']['cleaned_df']
+
     clean_df = pd.read_csv(clean_df_file_path)
 
     # Encoding the failure type

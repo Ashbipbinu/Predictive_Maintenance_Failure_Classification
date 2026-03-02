@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/534566108523991149/332a4b49ce764e6e9868573d16f313b4/artifacts
+deleted_time: 1772449715728
+end_time: 1772448221743
+entry_point_name: ''
+experiment_id: '534566108523991149'
+lifecycle_stage: deleted
+run_id: 332a4b49ce764e6e9868573d16f313b4
+run_name: Model_Tuning
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1772448207720
+status: 4
+tags: []
+user_id: LENOVO

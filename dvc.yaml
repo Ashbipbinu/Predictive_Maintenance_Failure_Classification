@@ -1,4 +1,5 @@
 stages:
+  
   data_preprocessing:
     cmd: python -m src.data.data_preprocessing
     deps:
@@ -6,6 +7,7 @@ stages:
     - src/data/data_preprocessing.py
     outs:
     - data/interim/cleaned_df.csv
+  
   data_processing:
     cmd: python -m src.features.build_features
     deps:
@@ -14,3 +16,13 @@ stages:
     outs:
     - data/processed/train_processed.csv
     - data/processed/test_processed.csv
+  
+  model_tuning:
+    cmd: python -m src.models.model_tuning.py
+    deps:
+    - config.yaml
+    - src/models/model_tuning.py
+    - data/processed/train_processed.csv
+    - params.yaml
+    outs:
+    - models/

@@ -81,3 +81,4 @@ data/*.gz
 .dvc/tmp
 .dvc/config.local
 /model
+/models

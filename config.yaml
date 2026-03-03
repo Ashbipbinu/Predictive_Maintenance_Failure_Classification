@@ -3,5 +3,8 @@ data:
   raw_df: H:\Predictive_Classification\data\raw\predictive_maintenance.csv
   test_data: H:\Predictive_Classification\data\processed\test_processed.csv
   train_data: H:\Predictive_Classification\data\processed\train_processed.csv
+
 model:
-  best_model: H:\Predictive_Classification\models\lasso.pkl
+  knn: H:\Predictive_Classification\models\knn.pkl
+  random_forest: H:\Predictive_Classification\models\random_forest.pkl
+  xgboost: H:\Predictive_Classification\models\xgboost.pkl

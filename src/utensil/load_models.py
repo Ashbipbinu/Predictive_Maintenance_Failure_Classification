@@ -1,7 +1,7 @@
 # Importing models
-from sklearn.linear_model import Lasso
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
+from sklearn.neighbors import KNeighborsClassifier
 
 from src.utensil.load_params import load_params
 
@@ -12,7 +12,7 @@ def load_ml_models():
     seed = params["base"]["random_state"]
 
     return {
-        "lasso": Lasso(random_state=seed),
-        "random": RandomForestClassifier(random_state=seed),
+        "random_forest": RandomForestClassifier(random_state=seed),
         "xgboost": XGBClassifier(random_state=seed),
+        "knn": KNeighborsClassifier(n_neighbors=5),
     }

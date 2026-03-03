@@ -1,5 +1,4 @@
 stages:
-  
   data_preprocessing:
     cmd: python -m src.data.data_preprocessing
     deps:
@@ -7,7 +6,7 @@ stages:
     - src/data/data_preprocessing.py
     outs:
     - data/interim/cleaned_df.csv
-  
+
   data_processing:
     cmd: python -m src.features.build_features
     deps:
@@ -17,4 +16,13 @@ stages:
     - data/processed/train_processed.csv
     - data/processed/test_processed.csv
   
-  
+  train_model:
+    cmd: python -m src.models.train_model
+    deps:
+    - data/processed/train_processed.csv
+    - src/models/train_model.py
+    outs:
+    - models/
+    metrics:
+    - metrics.json:
+        cache: false

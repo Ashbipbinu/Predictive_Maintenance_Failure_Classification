@@ -17,12 +17,4 @@ stages:
     - data/processed/train_processed.csv
     - data/processed/test_processed.csv
   
-  model_tuning:
-    cmd: python -m src.models.model_tuning.py
-    deps:
-    - config.yaml
-    - src/models/model_tuning.py
-    - data/processed/train_processed.csv
-    - params.yaml
-    outs:
-    - models/
+  

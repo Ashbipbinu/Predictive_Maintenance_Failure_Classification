@@ -1,8 +1,0 @@
-{
-    "random_forest_binary_f1": 0.9934923923307273,
-    "random_forest_multi_f1": 0.9951169262981733,
-    "xgboost_binary_f1": 0.9921239329379735,
-    "xgboost_multi_f1": 0.9954657027882741,
-    "knn_binary_f1": 0.416815162805767,
-    "knn_multi_f1": 0.04164641063036785
-}

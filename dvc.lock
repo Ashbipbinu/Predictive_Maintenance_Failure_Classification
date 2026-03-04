@@ -45,15 +45,15 @@ stages:
       size: 3547056
     - path: src/models/train_model.py
       hash: md5
-      md5: e95548d25a375f97833d5fc754d26157
-      size: 4280
+      md5: d0d1f870a6c970717486fbf3a30e5bec
+      size: 4574
     outs:
     - path: metrics.json
       hash: md5
-      md5: 852405905fc520554b294fad8c0e6417
-      size: 280
+      md5: e6009999fd7c257c372460eda544ef0f
+      size: 835
     - path: models/
       hash: md5
-      md5: 45abe3a4d15c316a660a3f8b10750525.dir
+      md5: 6b04f811503f1318fec93d81b0096bcd.dir
       size: 39798120
       nfiles: 4

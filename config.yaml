@@ -3,7 +3,6 @@ data:
   raw_df: H:\Predictive_Classification\data\raw\predictive_maintenance.csv
   test_data: H:\Predictive_Classification\data\processed\test_processed.csv
   train_data: H:\Predictive_Classification\data\processed\train_processed.csv
-
 model:
   knn: H:\Predictive_Classification\models\knn.pkl
   random_forest: H:\Predictive_Classification\models\random_forest.pkl

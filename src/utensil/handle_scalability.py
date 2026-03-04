@@ -20,12 +20,21 @@ def handle_scale(data: pd.DataFrame, is_train: bool) -> pd.DataFrame:
         with open(file_name, "wb") as file:
             pickle.dump(scale, file)
 
-        return train_scale
-
+        return pd.DataFrame(
+            train_scale,
+            columns=data.columns,
+            index=data.index
+        )
+    
     with open("models/scale.pkl", "rb") as file:
         scale = pickle.load(file)
         test_scale = scale.transform(data)
-        return test_scale
+        
+        return pd.DataFrame(
+            test_scale,
+            columns=data.columns,
+            index=data.index
+        )
     
 
 if  __name__ == '__main__':

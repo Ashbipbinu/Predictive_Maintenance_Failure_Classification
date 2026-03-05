@@ -73,7 +73,7 @@ if __name__ == '__main__':
     directory = os.getcwd()
     raw_data_file_path = os.path.join(directory, r"data\raw\predictive_maintenance.csv")
     df_cleaned = data_load_preprocessing(raw_data_file_path)
-
+    print('encoding Ended!!!!!')
     print('df_cleaned', df_cleaned.head())
     
     # Saving the file to data/interim 

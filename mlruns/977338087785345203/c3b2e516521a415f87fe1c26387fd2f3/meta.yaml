@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/977338087785345203/c3b2e516521a415f87fe1c26387fd2f3/artifacts
+deleted_time: 1772612030865
 end_time: 1772611225797
 entry_point_name: ''
 experiment_id: '977338087785345203'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: c3b2e516521a415f87fe1c26387fd2f3
 run_name: Trial_xgboost
 source_name: ''

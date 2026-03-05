@@ -1,0 +1,10 @@
+artifact_location: mlflow-artifacts:/977338087785345203/models/m-923bea75df1749ba9fe2beef52cd597b/artifacts
+creation_timestamp: 1772691482505
+experiment_id: '977338087785345203'
+last_updated_timestamp: 1772691493343
+model_id: m-923bea75df1749ba9fe2beef52cd597b
+model_type: ''
+name: knn
+source_run_id: 7489d202388a4524867bab404b8dae52
+status: 2
+status_message: null

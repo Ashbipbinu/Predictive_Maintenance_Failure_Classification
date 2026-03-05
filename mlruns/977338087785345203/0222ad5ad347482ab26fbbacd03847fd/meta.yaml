@@ -1,8 +1,9 @@
 artifact_uri: mlflow-artifacts:/977338087785345203/0222ad5ad347482ab26fbbacd03847fd/artifacts
+deleted_time: 1772612030809
 end_time: 1772611230880
 entry_point_name: ''
 experiment_id: '977338087785345203'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 0222ad5ad347482ab26fbbacd03847fd
 run_name: Parent Optimization Run
 source_name: ''

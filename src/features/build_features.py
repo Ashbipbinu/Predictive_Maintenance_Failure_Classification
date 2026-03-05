@@ -1,6 +1,5 @@
 import pandas as pd
 import os
-import yaml
 
 from src.utensil.handle_encodings import handle_target_encodings
 from src.utensil.save_file import save_file
@@ -14,10 +13,8 @@ def built_features() -> pd.DataFrame:
     clean_df_file_path = config['data']['cleaned_df']
 
     clean_df = pd.read_csv(clean_df_file_path)
-    print('encoding started!!!!!!!!!!!!!!!!!!!!!')
     # Encoding the failure type
     clean_df["failure_type"] = handle_target_encodings(clean_df["failure_type"])
-    print("Enocding completed!!!!!!!!!!!!!!!!!!!")
     
     # Temperature difference
     clean_df['temp_diff_k'] = abs(clean_df['process_temperature_k'] - clean_df['air_temperature_k'])

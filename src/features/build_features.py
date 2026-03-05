@@ -14,10 +14,10 @@ def built_features() -> pd.DataFrame:
     clean_df_file_path = config['data']['cleaned_df']
 
     clean_df = pd.read_csv(clean_df_file_path)
-    print('encoding started!!!!!!')
+    print('encoding started!!!!!!!!!!!!!!!!!!!!!')
     # Encoding the failure type
     clean_df["failure_type"] = handle_target_encodings(clean_df["failure_type"])
-    print("Enocding completed!!!!!")
+    print("Enocding completed!!!!!!!!!!!!!!!!!!!")
     
     # Temperature difference
     clean_df['temp_diff_k'] = abs(clean_df['process_temperature_k'] - clean_df['air_temperature_k'])

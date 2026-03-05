@@ -15,6 +15,7 @@ stages:
     outs:
     - data/processed/train_processed.csv
     - data/processed/test_processed.csv
+    - models/target_encodings.pkl
   
   train_model:
     cmd: python -m src.models.train_model
@@ -22,7 +23,7 @@ stages:
     - data/processed/train_processed.csv
     - src/models/train_model.py
     outs:
-    - models/
+    - models/scale.pkl
     metrics:
     - metrics.json:
         cache: false

@@ -36,6 +36,10 @@ stages:
       hash: md5
       md5: 7c4284f31f2c9183cd12e4f45649dae7
       size: 3547056
+    - path: models/target_encodings.pkl
+      hash: md5
+      md5: 9de7ea8918a2c83869815c11f1faf435
+      size: 358
   train_model:
     cmd: python -m src.models.train_model
     deps:
@@ -52,8 +56,7 @@ stages:
       hash: md5
       md5: e6009999fd7c257c372460eda544ef0f
       size: 835
-    - path: models/
+    - path: models/scale.pkl
       hash: md5
-      md5: 21b74181dca3cf90dfcc7ed6b73552ed.dir
-      size: 39798297
-      nfiles: 4
+      md5: a2499dc0ee24542c4a48ed527d783baa
+      size: 773

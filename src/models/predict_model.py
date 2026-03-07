@@ -31,6 +31,7 @@ def visualize_metrics(report, threshold, col, y_test, y_pred):
 
     return
 
+
 def predict_model():
 
     # Loading the test data
@@ -44,9 +45,9 @@ def predict_model():
     with open(file_path, "rb") as file:
         best_model = pickle.load(file)
 
-    columns=['target', 'failure_type']
+    columns = ["target", "failure_type"]
     X_test = test_df.drop(columns=columns)
-    
+
     # False Negatives are expensive, so a threshold is set to address this issue
     threshold = 0.3
 

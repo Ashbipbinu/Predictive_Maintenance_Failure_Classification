@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/977338087785345203/27ce0939e02b4cebb66007ce6d2fee8d/artifacts
+end_time: 1772865575488
+entry_point_name: ''
+experiment_id: '977338087785345203'
+lifecycle_stage: active
+run_id: 27ce0939e02b4cebb66007ce6d2fee8d
+run_name: Parent Optimization Run
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1772865473272
+status: 3
+tags: []
+user_id: LENOVO

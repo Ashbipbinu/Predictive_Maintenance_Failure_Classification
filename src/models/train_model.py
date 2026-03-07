@@ -35,6 +35,7 @@ def evaluate_multioutput(y_true, y_pred):
 
     return metrics
 
+
 def train_model():
 
     with mlflow.start_run(run_name="Parent Optimization Run") as parent_run:
@@ -145,6 +146,7 @@ def train_model():
         # Write to metrics.json
         with open("metrics.json", "w") as f:
             json.dump(all_results, f, indent=4)
-        
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     train_model()

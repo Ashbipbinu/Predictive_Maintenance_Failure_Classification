@@ -49,8 +49,8 @@ stages:
       size: 3547056
     - path: src/models/train_model.py
       hash: md5
-      md5: 8264eba05f233970e6d45b4dac33133e
-      size: 5310
+      md5: de7cb9dae86aafc597893f58f0c5cceb
+      size: 5306
     outs:
     - path: metrics.json
       hash: md5
@@ -73,7 +73,7 @@ stages:
       size: 34911686
     - path: src/models/predict_model.py
       hash: md5
-      md5: 053f588e627803caedd58ce067526348
+      md5: 27651f48702048f5c95fdfffc7173cdc
       size: 1989
     outs:
     - path: confusion-failure_type.png
@@ -84,6 +84,29 @@ stages:
       hash: md5
       md5: b75c040e3c324289b3ae22eab6c21e5b
       size: 22643
+    - path: test_metric-failure_type.json
+      hash: md5
+      md5: 88419ba1520232ee775c9d28040c2cb4
+      size: 136
+    - path: test_metric-target.json
+      hash: md5
+      md5: 8d55925821bd83ec173925d8c2dc99c2
+      size: 136
+  log_results:
+    cmd: python -m src.models.log_models_dagshub
+    deps:
+    - path: confusion-failure_type.png
+      hash: md5
+      md5: 70df87af943e18d3aedf54f94b6df979
+      size: 31694
+    - path: confusion-target.png
+      hash: md5
+      md5: b75c040e3c324289b3ae22eab6c21e5b
+      size: 22643
+    - path: src/models/log_models_dagshub.py
+      hash: md5
+      md5: fc9f58facd607039a581a3fb535338e3
+      size: 821
     - path: test_metric-failure_type.json
       hash: md5
       md5: 88419ba1520232ee775c9d28040c2cb4

@@ -27,6 +27,7 @@ stages:
     metrics:
     - metrics.json:
         cache: false
+  
   predit_model:
     cmd: python -m src.models.predict_model
     deps:
@@ -39,5 +40,14 @@ stages:
     metrics:
     - test_metric-target.json:
         cache: false
-    - test_metric-failure_type.json: 
+    - test_metric-failure_type.json:
         cache: false
+  
+  log_results:
+    cmd: python -m src.models.log_models_dagshub
+    deps:
+    - confusion-failure_type.png
+    - confusion-target.png
+    - test_metric-failure_type.json
+    - test_metric-target.json
+    - src/models/log_models_dagshub.py

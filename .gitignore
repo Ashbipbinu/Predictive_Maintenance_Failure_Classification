@@ -82,3 +82,7 @@ data/*.gz
 .dvc/config.local
 /model
 /models
+/test_metrics.json
+/confusion.png
+/confusion-failure_type.png
+/confusion-target.png

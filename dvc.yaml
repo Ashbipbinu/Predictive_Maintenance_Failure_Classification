@@ -16,7 +16,7 @@ stages:
     - data/processed/train_processed.csv
     - data/processed/test_processed.csv
     - models/target_encodings.pkl
-  
+
   train_model:
     cmd: python -m src.models.train_model
     deps:
@@ -26,4 +26,18 @@ stages:
     - models/scale.pkl
     metrics:
     - metrics.json:
+        cache: false
+  predit_model:
+    cmd: python -m src.models.predict_model
+    deps:
+    - data/processed/test_processed.csv
+    - models/random_forest.pkl
+    - src/models/predict_model.py
+    outs:
+    - confusion-failure_type.png
+    - confusion-target.png
+    metrics:
+    - test_metric-target.json:
+        cache: false
+    - test_metric-failure_type.json: 
         cache: false

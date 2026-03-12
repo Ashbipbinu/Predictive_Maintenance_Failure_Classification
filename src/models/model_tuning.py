@@ -17,8 +17,9 @@ from src.utensil.save_location_config import save_location_config
 mlflow.set_tracking_uri("http://127.0.0.1:5000/")
 mlflow.set_experiment("Model_Tuning")
 
+
 def train_model():
-    
+
     with mlflow.start_run(run_name="Model_Tuning") as parent_run:
         print(f"Parent run at {parent_run.info.run_id}")
 
@@ -35,12 +36,17 @@ def train_model():
 
         # Splitting the data for models except lasso
         columns_to_drop = ["target", "failure_type"]
-        X_train, X_test, y1_binary_train, y1_binary_test, y2_multi_train, y2_multi_test = (
-            handle_data_split(
-                data=train_data,
-                test_size=0.2,
-                columns_to_drop=columns_to_drop,
-            )
+        (
+            X_train,
+            X_test,
+            y1_binary_train,
+            y1_binary_test,
+            y2_multi_train,
+            y2_multi_test,
+        ) = handle_data_split(
+            data=train_data,
+            test_size=0.2,
+            columns_to_drop=columns_to_drop,
         )
 
         # Splitting the data for  lasso
@@ -97,13 +103,13 @@ def train_model():
 
         # Tuning each mmodel
         for task_name, task_data in tuning_tasks.items():
-            
+
             model = task_data["model"]
             X = task_data["X"]
             y = task_data["y"]
 
             with mlflow.start_run(run_name=f"Trial_{task_name}", nested=True):
-                model_name = task_name.split('_')[0]
+                model_name = task_name.split("_")[0]
                 print(f"Tuning {model_name} - {task_name.split('_')[-1]}")
                 model_params = params[model_name]
                 grid = GridSearchCV(model, model_params, cv=5)
@@ -124,11 +130,11 @@ def train_model():
                 mlflow.log_params(grid.best_params_)
                 mlflow.log_metric("Best accuracy", grid.best_score_)
                 mlflow.sklearn.log_model(best_model, artifact_path=model_name)
-                
+
                 # Write to metrics.json
                 with open("metrics.json", "w") as f:
                     json.dump({f"{task_name}_acc": grid.best_score_}, f)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     train_model()

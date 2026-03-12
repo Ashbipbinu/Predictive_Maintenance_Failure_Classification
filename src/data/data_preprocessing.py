@@ -23,7 +23,9 @@ def data_load_preprocessing(file_name: str) -> pd.DataFrame:
         df.drop(columns=columns, inplace=True)
         print("Successfully removed columns", columns)
 
-        # Converting the Type [ the quality class of the machinery being monitored ]
+        # Converting the Type
+        # [ the quality class of the machinery being monitored ]
+
         if "Type" in df.columns:
             df["Type"] = df["Type"].map({"L": 0, "M": 1, "H": 2})
 
@@ -31,7 +33,8 @@ def data_load_preprocessing(file_name: str) -> pd.DataFrame:
         if not df.isna().values.any():
             print("Not found any missing values")
         else:
-            # Handling the missing columns of numerical values - replace missing ones with mean
+            # Handling the missing columns of numerical values
+            # - replace missing ones with mean
             numeric_cols = df.select_dtypes(include=["number"]).columns
             df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
 
@@ -55,7 +58,9 @@ def data_load_preprocessing(file_name: str) -> pd.DataFrame:
         cleaned_columns = [col.replace(" ", "_").lower() for col in cleaned_columns]
         df.columns = cleaned_columns
 
-        # Checking class imbalance in the target- there are 2 targets in the particular data set - Target and Failure type
+        # Checking class imbalance in the target
+        # there are 2 targets in the particular data set
+        # Target and Failure type
         is_Target_imbalanced = check_class_imbalance(df["target"])
         is_Failure_Type_imbalanced = check_class_imbalance(df["failure_type"])
 
@@ -63,23 +68,28 @@ def data_load_preprocessing(file_name: str) -> pd.DataFrame:
             balanced_df = handle_imbalance(df)
         return balanced_df
 
-
     else:
         return None
 
-if __name__ == '__main__':
-    
+
+if __name__ == "__main__":
     # Fetching the data from the data/raw for preprocessing
     directory = os.getcwd()
-    raw_data_file_path = os.path.join(directory, r"data\raw\predictive_maintenance.csv")
+    raw_relative_path = os.path.join("data", "raw", "predictive_maintenance.csv")
+
+    raw_data_file_path = os.path.join(directory, raw_relative_path)
     df_cleaned = data_load_preprocessing(raw_data_file_path)
-    print('encoding Ended!!!!!')
-    print('df_cleaned', df_cleaned.head())
-    
-    # Saving the file to data/interim 
-    clean_df_file_path = os.path.join(directory, 'data', 'interim', 'cleaned_df.csv')
+    print("encoding Ended!!!!!!!!!")
+
+    # Saving the file to data/interim
+    clean_relative_path = os.path.join("data", "raw", "predictive_maintenance.csv")
+    clean_df_file_path = os.path.join(directory, clean_relative_path)
     save_file(clean_df_file_path, df_cleaned)
 
     # Saving the path in the config.yaml file - for cleaned and raw data
-    save_location_config(target_loc='data', key_name='raw_df', file_path=raw_data_file_path)
-    save_location_config(target_loc='data', key_name='cleaned_df', file_path=clean_df_file_path)
+    save_location_config(
+        target_loc="data", key_name="raw_df", file_path=raw_data_file_path
+    )
+    save_location_config(
+        target_loc="data", key_name="cleaned_df", file_path=clean_df_file_path
+    )

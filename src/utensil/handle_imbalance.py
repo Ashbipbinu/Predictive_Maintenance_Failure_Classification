@@ -3,12 +3,14 @@ import pandas as pd
 
 
 def handle_imbalance(df: pd.DataFrame) -> pd.DataFrame:
-    
+
     # Since the target labels are correlated to each other, combine them and SMOTE it
     target_cols = ["target", "failure_type"]
     feature_cols = [col for col in df.columns if col not in target_cols]
 
-    df["combined_target"] = df[target_cols[0]].astype(str) + "_" + df[target_cols[1]].astype(str)
+    df["combined_target"] = (
+        df[target_cols[0]].astype(str) + "_" + df[target_cols[1]].astype(str)
+    )
 
     X = df[feature_cols]
     y = df["combined_target"]
@@ -26,4 +28,3 @@ def handle_imbalance(df: pd.DataFrame) -> pd.DataFrame:
     resample_df[target_cols[1]] = split_targets[1]
 
     return resample_df
-    

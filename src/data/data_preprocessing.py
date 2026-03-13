@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print("encoding Ended!!!!!!!!!")
 
     # Saving the file to data/interim
-    clean_relative_path = os.path.join("data", "raw", "predictive_maintenance.csv")
+    clean_relative_path = os.path.join("data", "interim", "cleaned_df.csv")
     clean_df_file_path = os.path.join(directory, clean_relative_path)
     save_file(clean_df_file_path, df_cleaned)
 

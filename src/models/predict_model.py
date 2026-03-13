@@ -49,7 +49,7 @@ def predict_model():
     X_test = test_df.drop(columns=columns)
 
     # False Negatives are expensive, so a threshold is set to address this issue
-    threshold = 0.3
+    threshold = 0.5
 
     for i, col in enumerate(columns):
         y_test = test_df[col]

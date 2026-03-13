@@ -8,6 +8,7 @@ import os
 import pickle
 
 
+# Interface of the data
 class MachineData(BaseModel):
     type: int
     air_temperature_k: float
@@ -25,11 +26,7 @@ dagshub.init(
 )
 
 
-mlflow.set_tracking_uri(
-    "https://dagshub.com/ashbipbinu/"
-    "Predictive_Maintenance_Failure_Classification.mlflow"
-)
-
+# Creating FastApi instance
 app = FastAPI(title="predictive Maintenance API", version="4.0")
 
 # Loading the champion model
@@ -37,9 +34,21 @@ model_name = "Predictive_Maintenance_Model"
 model_uri = f"models:/{model_name}/Production"
 
 # Loading model
-print("Loading the model")
-model = mlflow.sklearn.load_model(model_uri=model_uri)
-print("Loading model completed")
+try:
+    model = mlflow.sklearn.load_model(model_uri=model_uri)
+    print("Model loaded successfully")
+except Exception as e:
+    print(f"Loading model failed + {e}")
+
+# Loading the encoder
+dir = os.getcwd()
+encoder_path = os.path.join(dir, "models", "target_encodings.pkl")
+try:
+    with open(encoder_path, "rb") as file:
+        encoder = pickle.load(file)
+    print("Encoder loaded successfully")
+except Exception as e:
+    print(f"Error loading encoder: {e}")
 
 
 @app.get("/")
@@ -50,19 +59,15 @@ def read_root():
 @app.post("/predict")
 def predict(data: MachineData):
 
-    dir = os.getcwd()
-    encoder_path = os.path.join(dir, "models", "target_encodings.pkl")
-
-    with open(encoder_path, "rb") as file:
-        encoder = pickle.load(file)
-
     data_dict = data.model_dump()
     df = pd.DataFrame([data_dict])
 
     # Making prediction
-    print("Prediction started")
-    prediction = model.predict(df)
-    print("Prediction ended")
+    try:
+        prediction = model.predict(df)
+        print("Model made prediction successfully")
+    except Exception as e:
+        print(f"Error happened while predicting + {e}")
 
     decoder = encoder.inverse_transform([int(prediction.flatten()[1])])
 

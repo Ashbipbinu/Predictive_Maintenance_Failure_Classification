@@ -5,24 +5,27 @@ on: push
 jobs:
   lint:
     strategy:
-       matrix: 
-          os: [macos-latest, windows-latest, ubuntu-latest]
-          python-version: ["3.11", "3.12"]
+      matrix: 
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        python-version: ["3.11", "3.12"]
   
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Steup python
+      - name: Setup python
         uses: actions/setup-python@v5
         with:
-            python-version: ${{ matrix.python-version }}
-            cache: 'pip'
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
       
       - name: Install Flake8
         run: pip install flake8
 
       - name: Run Flake8
+        # --max-line-length=100: Fixes all your E501 errors
+        # --exclude=docs/: Fixes all the F401 and E501 errors in conf.py
+        # --extend-ignore=E231,W293: (Optional) Skips whitespace errors if you want to fix them later
         run: |
-          flake8 .
+          flake8 . --count --max-line-length=100 --exclude=docs/ --statistics

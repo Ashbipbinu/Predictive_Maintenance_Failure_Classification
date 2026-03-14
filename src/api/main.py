@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 import os
 import pickle
+import numpy as np
 
 
 # Interface of the data
@@ -65,14 +66,34 @@ def predict(data: MachineData):
     # Making prediction
     try:
         prediction = model.predict(df)
+        probs = model.predict_proba(df)
         print("Model made prediction successfully")
     except Exception as e:
         print(f"Error happened while predicting + {e}")
 
-    decoder = encoder.inverse_transform([int(prediction.flatten()[1])])
-
     if prediction.ndim > 1:
         target = int(prediction.flatten()[0])
-        failure_type = str(decoder[0])
+        # failure_type = str(decoder[0])
 
-    return {"target": target, "failure_type": failure_type}
+        target_prob = probs[0][0][1]
+
+        threshold = 0.25
+        target_pred = int(target_prob >= threshold)
+
+        # Failure type (multiclass)
+        failure_probs = probs[1][0]
+        failure_pred = int(np.argmax(failure_probs))
+        decoded_failure = encoder.inverse_transform([failure_pred])[0]
+        failure_prob = float(np.max(failure_probs))
+
+    return {
+        "prediction": {
+            "target": target_pred,
+            "failure_type": decoded_failure,
+            "actual_target": target,
+        },
+        "probabilities": {
+            "target_failure_probability": target_prob * 100,
+            "failure_type_probability": failure_prob * 100,
+        },
+    }

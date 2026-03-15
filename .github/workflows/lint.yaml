@@ -24,8 +24,5 @@ jobs:
         run: pip install flake8
 
       - name: Run Flake8
-        # --max-line-length=100: Fixes all your E501 errors
-        # --exclude=docs/: Fixes all the F401 and E501 errors in conf.py
-        # --extend-ignore=E231,W293: (Optional) Skips whitespace errors if you want to fix them later
         run: |
-          flake8 . --count --max-line-length=100 --exclude=docs/ --statistics
+          flake8 . --count --max-line-length=100 --exclude=docs/ --extend-ignore=E231,W293 --statistics

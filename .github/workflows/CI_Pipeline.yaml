@@ -76,4 +76,4 @@ jobs:
           env:
             DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }} 
           run: |
-              python src/evaluate_and_transit_model.py
+              python src/models/transition_model.py

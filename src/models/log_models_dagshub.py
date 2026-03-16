@@ -1,14 +1,12 @@
 import dagshub
-
-import mlflow
-import mlflow.sklearn
-from mlflow.models import infer_signature
-from mlflow.tracking import MlflowClient
-
 import json
 import pandas as pd
 import pickle
+import mlflow
+import mlflow.sklearn
 
+from mlflow.models import infer_signature
+from mlflow.tracking import MlflowClient
 from src.utensil.load_config import load_config
 
 print(mlflow.__file__)
@@ -28,7 +26,7 @@ def log_to_mlflow():
         mlflow.log_artifacts("src", artifact_path="code")
 
         # Log config.yaml
-        mlflow.log_artifact('config.yaml')
+        mlflow.log_artifact("config.yaml")
 
         # Log metrics
         for col in ["target", "failure_type"]:
@@ -76,16 +74,16 @@ def log_to_mlflow():
         if latest_version_info:
             latest_Version = latest_version_info[0].version
 
-            # Transitioning model from None to champion which is on this version,
+            # Transitioning model from None to Staging which is on this version,
             # also demote the exisiting model to archieve if any
             client.transition_model_version_stage(
                 name=model_name,
                 version=latest_Version,
-                stage="Production",
+                stage="Staging",
                 archive_existing_versions=True,
             )
 
-            print("Model is now the Production Champion. ")
+            print("Model is now the Staging. ")
 
         else:
             print("No new model version found to transition.")

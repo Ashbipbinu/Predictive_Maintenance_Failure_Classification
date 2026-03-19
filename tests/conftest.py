@@ -1,21 +1,21 @@
 import pytest
-import yaml
+import os
 
 from src.data.data_preprocessing import data_load_preprocessing
 
 
 @pytest.fixture(scope="session")
-def config():
-    with open("config.yaml", "r") as file:
-        config = yaml.safe_load(file)
+def path():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.join(current_dir, "..")
 
-    return config
+    return project_root
 
 
 # For Data
 @pytest.fixture
-def raw_data_path(config):
-    data_path = config["data"]["raw_df"]
+def raw_data_path(path):
+    data_path = os.path.join(path, "data", "raw", "predictive_maintenance.csv")
 
     return data_path
 

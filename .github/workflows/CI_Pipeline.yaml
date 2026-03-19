@@ -51,7 +51,16 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install pytest
-        
+
+        - name: Pull Data from DagsHub
+          env:
+            AWS_ACCESS_KEY_ID: ${{ secrets.DAGSHUB_TOKEN }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.DAGSHUB_TOKEN }}
+          run: |
+             dvc pull
+             mkdir -p /tmp/predictive_maintenance/data/raw/
+             cp data/raw/predictive_maintenance.csv /tmp/predictive_maintenance/data/raw/
+          
         - name: Run test
           run: |
             pytest -v

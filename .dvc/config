@@ -1,8 +1,10 @@
 [core]
-    remote = myremote
+    remote = origin
 ['remote "storage"']
     url = gdrive://1ZuKcHdc7rnec9WMG5Zt11XgXpsvDPJt6
     gdrive_use_service_account = true
     gdrive_service_account_json_file_path = ../Predictive_Maintenance_Failure_Classification/gdrive-key.json.json
 ['remote "myremote"']
     url = C:\dvc_storage
+['remote "origin"']
+    url = https://dagshub.com/Ashbipbinu/Predictive_Maintenance_Failure_Classification.dvc

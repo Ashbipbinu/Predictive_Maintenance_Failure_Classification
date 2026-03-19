@@ -80,7 +80,7 @@ def evaluate_and_transit_model():
 
     # Loading the token from the environment
     try:
-        token = os.getenv('"DAGSHUB_TOKEN"')
+        token = os.getenv("DAGSHUB_TOKEN")
         dagshub.auth.add_app_token(token)
     except Exception as e:
         print(f"Error while loading / authenticating token: {e}")

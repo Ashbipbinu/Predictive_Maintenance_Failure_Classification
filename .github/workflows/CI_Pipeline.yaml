@@ -88,6 +88,7 @@ jobs:
         - name: Prmote Model to Production
           if: success()
           env:
-            DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }} 
+            DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+            DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
           run: |
               python src/models/transition_model.py

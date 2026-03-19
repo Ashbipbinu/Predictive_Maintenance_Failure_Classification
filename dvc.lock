@@ -105,8 +105,8 @@ stages:
       size: 23095
     - path: src/models/log_models_dagshub.py
       hash: md5
-      md5: 545515d3d3c09bcb2c38b62bc6b54230
-      size: 2899
+      md5: 52b9eb428dd3c563f19966bb6fe7b82c
+      size: 2873
     - path: test_metric-failure_type.json
       hash: md5
       md5: 6c9c7a298cf85e1906f33dace7bda7db

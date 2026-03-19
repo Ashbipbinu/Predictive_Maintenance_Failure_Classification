@@ -9,8 +9,6 @@ from mlflow.models import infer_signature
 from mlflow.tracking import MlflowClient
 from src.utensil.load_config import load_config
 
-print(mlflow.__file__)
-
 
 def log_to_mlflow():
 

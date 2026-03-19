@@ -4,15 +4,15 @@ import yaml
 import mlflow
 import sys
 import logging
+import numpy as np
+import os
 
 from sklearn.metrics import classification_report
 
 
 def init_dagshub(repo_name, repo_owner):
     try:
-        dagshub.init(
-            repo_name=repo_name, repo_owner=repo_owner, mlflow=True
-            )
+        dagshub.init(repo_name=repo_name, repo_owner=repo_owner, mlflow=True)
         print("Sucessfully initialized dagshub")
     except Exception as e:
         print(f"Error while initializing the dagshub: {e}")
@@ -22,12 +22,17 @@ def init_dagshub(repo_name, repo_owner):
 
 def run_quality_gate(model, test_df, columns, threshold=0.25, gate_threshold=0.95):
     X_test = test_df.drop(columns=columns)
+    all_probs = model.predict_proba(X_test)
+
     # Predicting the model
     for i, col in enumerate(columns):
-        y_test = test_df[col]
-        y_prob = model.predict_proba(X_test)[i][:, 1]
-        y_pred = (y_prob >= threshold).astype(int)
-        report = classification_report(y_test, y_pred, output_dict=True)
+        y_true = test_df[col]
+        probs = all_probs[i]
+        y_pred = np.argmax(probs, axis=1)
+
+        report = classification_report(
+            y_true, y_pred, output_dict=True, zero_division=0
+        )
 
         label_report = [
             col
@@ -73,6 +78,13 @@ def evaluate_and_transit_model():
     repo_owner = "ashbipbinu"
     init_dagshub(repo_name, repo_owner)
 
+    # Loading the token from the environment
+    try:
+        token = os.getenv('"DAGSHUB_TOKEN"')
+        dagshub.auth.add_app_token(token)
+    except Exception as e:
+        print(f"Error while loading / authenticating token: {e}")
+
     # Loading the config
     try:
         with open("config.yaml", "r") as file:
@@ -98,7 +110,7 @@ def evaluate_and_transit_model():
         columns = ["target", "failure_type"]
         is_production_ready = run_quality_gate(
             model=model, test_df=test_data, columns=columns
-            )
+        )
 
         # Whether to productionize the model or not
         if is_production_ready:

@@ -71,8 +71,13 @@ jobs:
         - name: Install dependencies
           run: |
             pip install -r requirements.txt
+
+        - name: Test Model production
+          run: |
+             python -m pytest tests/test_quality_gate.py -k "test_model_production_pass"
         
-        - name: Run Quality Gate and Promote
+        - name: Prmote Model to Production
+          if: success()
           env:
             DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }} 
           run: |

@@ -25,8 +25,3 @@ def preprocessing_data(raw_data_path):
     df_cleaned = data_load_preprocessing(raw_data_path)
 
     return df_cleaned
-
-
-# For Model
-# def get_temp_dir(config):
-# temp_dir

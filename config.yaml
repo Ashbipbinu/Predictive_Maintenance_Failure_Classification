@@ -1,9 +1,9 @@
 data:
-  cleaned_df: H:\Predictive_Classification\data\interim\cleaned_df.csv
-  raw_df: H:\Predictive_Classification\data\raw\predictive_maintenance.csv
-  test_data: H:\Predictive_Classification\data\processed\test_processed.csv
-  train_data: H:\Predictive_Classification\data\processed\train_processed.csv
+  cleaned_df: data\interim\cleaned_df.csv
+  raw_df: data\raw\predictive_maintenance.csv
+  test_data: data\processed\test_processed.csv
+  train_data: data\processed\train_processed.csv
 model:
-  knn: H:\Predictive_Classification\models\knn.pkl
-  random_forest: H:\Predictive_Classification\models\random_forest.pkl
-  xgboost: H:\Predictive_Classification\models\xgboost.pkl
+  knn: models\knn.pkl
+  random_forest: models\random_forest.pkl
+  xgboost: models\xgboost.pkl

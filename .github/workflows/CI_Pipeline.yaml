@@ -83,6 +83,16 @@ jobs:
         - name: Install dependencies
           run: |
             pip install -r requirements.txt
+          
+        - name: Setup DVC auth
+          run: |
+            dvc remote modify origin auth basic
+            dvc remote modify origin user ${{ secrets.DAGSHUB_USER }}
+            dvc remote modify origin password ${{ secrets.DAGSHUB_TOKEN }}
+
+        - name: Pull Data
+          run: |
+            dvc pull
 
         - name: Test Model production
           run: |
@@ -92,6 +102,6 @@ jobs:
           if: success()
           env:
             DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
-            DAGSHUB_USER_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+            DAGSHUB_USER: ${{ secrets.DAGSHUB_USER }}
           run: |
               python src/models/transition_model.py

@@ -85,12 +85,13 @@ jobs:
             python -m pip install --upgrade pip
             pip install -r requirements.txt
             pip install pytest
+            pip install dvc
           
         - name: Setup DVC auth
           run: |
-            dvc remote modify origin auth basic
-            dvc remote modify origin user ${{ secrets.DAGSHUB_USER }}
-            dvc remote modify origin password ${{ secrets.DAGSHUB_TOKEN }}
+             dvc remote modify origin --local auth basic
+             dvc remote modify origin --local user ${{ secrets.DAGSHUB_USER }}
+             dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
 
         - name: Pull Data
           run: |

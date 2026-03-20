@@ -1,6 +1,5 @@
 import pandas as pd
 import dagshub
-import yaml
 import mlflow
 import sys
 import logging
@@ -85,17 +84,9 @@ def evaluate_and_transit_model():
     repo_owner = "ashbipbinu"
     init_dagshub(repo_name, repo_owner)
 
-    # Loading the config
-    try:
-        with open("config.yaml", "r") as file:
-            config = yaml.safe_load(file)
-            print("Successfully loaded config.yaml")
-    except Exception as e:
-        print(f"Failed loading config.yaml {e}")
-        sys.exit(1)
-
     # Loading the test data
-    test_data_path = config["data"]["test_data"]
+    BASE_DIR = os.getcwd()
+    test_data_path = os.path.join(BASE_DIR, "data", "processed", "test_processed.csv")
     test_data = pd.read_csv(test_data_path)
 
     if not test_data.empty:

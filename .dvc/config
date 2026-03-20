@@ -2,3 +2,6 @@
     remote = origin
 ['remote "origin"']
     url = https://dagshub.com/Ashbipbinu/Predictive_Maintenance_Failure_Classification.dvc
+    auth = basic
+    user = ashbipbinu
+    password = be96095566f979273718e6648f92e47129343538

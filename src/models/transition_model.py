@@ -73,17 +73,17 @@ def promote_to_production(model_name):
 
 
 def evaluate_and_transit_model():
+    # Loading the token from the environment
+    try:
+        dagshub.auth.add_app_token(os.getenv("DAGSHUB_TOKEN"))
+        print("Success: Logging to Dagshub")
+    except Exception as e:
+        print(f"Error while loading / authenticating token: {e}")
+
     # Initializing the dagshub
     repo_name = "Predictive_Maintenance_Failure_Classification"
     repo_owner = "ashbipbinu"
     init_dagshub(repo_name, repo_owner)
-
-    # Loading the token from the environment
-    try:
-        token = os.getenv("DAGSHUB_TOKEN")
-        dagshub.auth.add_app_token(token)
-    except Exception as e:
-        print(f"Error while loading / authenticating token: {e}")
 
     # Loading the config
     try:

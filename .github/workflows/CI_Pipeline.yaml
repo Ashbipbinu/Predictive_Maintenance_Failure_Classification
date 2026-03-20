@@ -93,7 +93,7 @@ jobs:
              dvc remote modify origin --local user ${{ secrets.DAGSHUB_USER }}
              dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
 
-        - name: Pull Data
+        - name: Pull Data 
           run: |
             dvc pull
 

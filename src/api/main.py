@@ -19,6 +19,13 @@ class MachineData(BaseModel):
     temp_diff_k: float
 
 
+# Loading the token from the environment
+try:
+    dagshub.auth.add_app_token(os.getenv("DAGSHUB_TOKEN"))
+    print("Success: Logging to Dagshub")
+except Exception as e:
+    print(f"Error while loading / authenticating token: {e}")
+
 # Initialize DagsHub
 dagshub.init(
     repo_owner="ashbipbinu",

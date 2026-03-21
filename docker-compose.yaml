@@ -1,0 +1,11 @@
+services:
+  my-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MLFLOW_TRACKING_URI=https://dagshub.com/ashbipbinu/Predictive_Maintenance_Failure_Classification.mlflow
+      - MLFLOW_TRACKING_USERNAME=ashbipbinu
+      - MLFLOW_TRACKING_PASSWORD=2df21313008b87f003a35c2ef28f350cfeb98718
+      - DAGSHUB_TOKEN=2df21313008b87f003a35c2ef28f350cfeb98718
+      - MODEL_NAME=Predictive_Maintenance_Model

@@ -23,6 +23,9 @@ def log_to_mlflow():
         # Log code
         mlflow.log_artifacts("src", artifact_path="code")
 
+        # Log the encoder
+        mlflow.log_artifact("models/target_encodings.pkl")
+
         # Log config.yaml
         mlflow.log_artifact("config.yaml")
 

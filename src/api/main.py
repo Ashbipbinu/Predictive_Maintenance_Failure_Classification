@@ -1,12 +1,12 @@
-from fastapi import FastAPI
-import dagshub
 import pandas as pd
+import dagshub
 import mlflow.sklearn
-from pydantic import BaseModel
-
 import os
 import pickle
 import numpy as np
+
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 
 # Interface of the data
@@ -40,6 +40,22 @@ app = FastAPI(title="predictive Maintenance API", version="4.0")
 # Loading the champion model
 model_name = "Predictive_Maintenance_Model"
 model_uri = f"models:/{model_name}/Production"
+
+# Loading the encoder from the dagshub
+encoder = None
+try:
+    print("Fetching encoder from MLflow artifacts...")
+    # This points to the same 'Production' model run you use for the model
+    # It will look for 'target_encodings.pkl' inside that run's artifacts
+    local_encoder_path = mlflow.artifacts.download_artifacts(
+        artifact_uri=f"models:/{model_name}/Production/target_encodings.pkl"
+    )
+
+    with open(local_encoder_path, "rb") as file:
+        encoder = pickle.load(file)
+    print("Encoder loaded successfully from MLflow!")
+except Exception as e:
+    print(f"Failed to fetch encoder from MLflow: {e}")
 
 # Loading model
 try:

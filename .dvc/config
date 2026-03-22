@@ -3,5 +3,5 @@
 ['remote "origin"']
     url = https://dagshub.com/Ashbipbinu/Predictive_Maintenance_Failure_Classification.dvc
     auth = basic
-    user = ashbipbinu
+    user = Ashbipbinu
     password = be96095566f979273718e6648f92e47129343538

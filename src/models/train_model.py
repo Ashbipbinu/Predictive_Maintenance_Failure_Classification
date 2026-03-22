@@ -4,6 +4,8 @@ import mlflow.sklearn
 import os
 import pickle
 import json
+import dagshub
+from dotenv import load_dotenv
 
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import accuracy_score, f1_score
@@ -15,8 +17,7 @@ from src.utensil.handle_scalability import handle_scale
 from src.utensil.save_location_config import save_location_config
 from src.utensil.handle_data_split import handle_data_split
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000/")
-mlflow.set_experiment("Predictive_Maintenance")
+load_dotenv()
 
 
 def evaluate_multioutput(y_true, y_pred):
@@ -37,6 +38,21 @@ def evaluate_multioutput(y_true, y_pred):
 
 
 def train_model():
+
+    try:
+        dagshub.auth.add_app_token(os.getenv("DAGSHUB_TOKEN"))
+        print("Success: Logging to Dagshub")
+    except Exception as e:
+        print(f"Error while loading / authenticating token: {repr(e)}")
+
+    # Initialize DagsHub
+    dagshub.init(
+        repo_owner="ashbipbinu",
+        repo_name="Predictive_Maintenance_Failure_Classification",
+        mlflow=True,
+    )
+
+    mlflow.set_experiment("Predictive_Maintenance")
 
     with mlflow.start_run(run_name="Parent Optimization Run") as parent_run:
         print(f"parent run id: {parent_run.info.run_id}")

@@ -5,6 +5,7 @@ import os
 import pickle
 import numpy as np
 
+from mlflow.tracking import MlflowClient
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -52,18 +53,28 @@ model_name = "Predictive_Maintenance_Model"
 model_uri = f"models:/{model_name}/Production"
 
 # Loading the encoder from the dagshub
+client = MlflowClient()
 encoder = None
+
 try:
-    print("Fetching encoder from MLflow artifacts...")
-    local_encoder_path = mlflow.artifacts.download_artifacts(
-        artifact_uri=f"models:/{model_name}/Production/target_encodings.pkl"
+    print(f"Fetching production model details for: {model_name}")
+    latest_version = client.get_latest_versions(model_name, stages=["Production"])[0]
+    run_id = latest_version.run_id
+
+    print(f"Downloading encoder from Run: {run_id}")
+    local_dir = mlflow.artifacts.download_artifacts(
+        run_id=run_id,
+        artifact_path="model/target_encodings.pkl",
     )
 
-    with open(local_encoder_path, "rb") as file:
+    with open(local_dir, "rb") as file:
         encoder = pickle.load(file)
-    print("Encoder loaded successfully from MLflow!")
+    print(" Encoder loaded successfully!")
+
 except Exception as e:
-    print(f"Failed to fetch encoder from MLflow: {e}")
+    print(
+        f"Critical Error: Could not load encoder. Prediction will fail. Error: {e}"
+    )
 
 # Loading model
 try:

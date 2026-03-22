@@ -47,8 +47,8 @@ def train_model():
 
     # Initialize DagsHub
     dagshub.init(
-        repo_owner="ashbipbinu",
-        repo_name="Predictive_Maintenance_Failure_Classification",
+        repo_owner=os.getenv("DAGSHUB_USER_NAME"),
+        repo_name=os.getenv("DAGSHUB_REPO_NAME"),
         mlflow=True,
     )
 

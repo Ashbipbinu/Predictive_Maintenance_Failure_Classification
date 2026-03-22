@@ -4,17 +4,22 @@ import pandas as pd
 import pickle
 import mlflow
 import mlflow.sklearn
+import os
 
 from mlflow.models import infer_signature
 from mlflow.tracking import MlflowClient
 from src.utensil.load_config import load_config
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def log_to_mlflow():
 
     dagshub.init(
-        repo_owner="ashbipbinu",
-        repo_name="Predictive_Maintenance_Failure_Classification",
+        repo_owner=os.getenv("DAGSHUB_USER_NAME"),
+        repo_name=os.getenv("DAGSHUB_REPO_NAME"),
         mlflow=True,
     )
 
@@ -22,9 +27,6 @@ def log_to_mlflow():
 
         # Log code
         mlflow.log_artifacts("src", artifact_path="code")
-
-        # Log the encoder
-        mlflow.log_artifact("models/target_encodings.pkl")
 
         # Log config.yaml
         mlflow.log_artifact("config.yaml")
@@ -64,6 +66,7 @@ def log_to_mlflow():
             registered_model_name="Predictive_Maintenance_Model",
             signature=signature,
             input_example=input_example,
+            code_paths=["models/target_encodings.pkl"]
         )
 
         # Updating the staging of the model as 'Champion'

@@ -23,17 +23,23 @@ class MachineData(BaseModel):
     temp_diff_k: float
 
 
+token = os.getenv("DAGSHUB_TOKEN")
+repo_owner = os.getenv("DAGSHUB_USER_NAME")
+repo_name = os.getenv("DAGSHUB_REPO_NAME")
+
+
 # Loading the token from the environment
 try:
-    dagshub.auth.add_app_token(os.getenv("DAGSHUB_TOKEN"))
+    dagshub.auth.add_app_token(token)
     print("Success: Logging to Dagshub")
 except Exception as e:
     print(f"Error while loading / authenticating token: {repr(e)}")
 
+
 # Initialize DagsHub
 dagshub.init(
-    repo_owner="ashbipbinu",
-    repo_name="Predictive_Maintenance_Failure_Classification",
+    repo_owner=repo_owner,
+    repo_name=repo_name,
     mlflow=True,
 )
 
@@ -49,8 +55,6 @@ model_uri = f"models:/{model_name}/Production"
 encoder = None
 try:
     print("Fetching encoder from MLflow artifacts...")
-    # This points to the same 'Production' model run you use for the model
-    # It will look for 'target_encodings.pkl' inside that run's artifacts
     local_encoder_path = mlflow.artifacts.download_artifacts(
         artifact_uri=f"models:/{model_name}/Production/target_encodings.pkl"
     )
@@ -67,16 +71,6 @@ try:
     print("Model loaded successfully")
 except Exception as e:
     print(f"Loading model failed + {e}")
-
-# Loading the encoder
-dir = os.getcwd()
-encoder_path = os.path.join(dir, "models", "target_encodings.pkl")
-try:
-    with open(encoder_path, "rb") as file:
-        encoder = pickle.load(file)
-    print("Encoder loaded successfully")
-except Exception as e:
-    print(f"Error loading encoder: {e}")
 
 
 @app.get("/")

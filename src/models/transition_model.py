@@ -8,6 +8,9 @@ import os
 
 from sklearn.metrics import classification_report
 
+from dotenv import load_dotenv
+load_dotenv()
+
 
 def init_dagshub(repo_name, repo_owner):
     try:

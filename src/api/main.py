@@ -8,6 +8,10 @@ import numpy as np
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Interface of the data
 class MachineData(BaseModel):
@@ -24,7 +28,7 @@ try:
     dagshub.auth.add_app_token(os.getenv("DAGSHUB_TOKEN"))
     print("Success: Logging to Dagshub")
 except Exception as e:
-    print(f"Error while loading / authenticating token: {e}")
+    print(f"Error while loading / authenticating token: {repr(e)}")
 
 # Initialize DagsHub
 dagshub.init(

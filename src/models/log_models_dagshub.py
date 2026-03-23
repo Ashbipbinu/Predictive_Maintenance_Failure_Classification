@@ -59,6 +59,8 @@ def log_to_mlflow():
         signature = infer_signature(X_data, best_model.predict(X_data))
         input_example = X_data.iloc[:5]
 
+        mlflow.log_artifact("models/target_encodings.pkl")
+
         # Registering the best model
         mlflow.sklearn.log_model(
             sk_model=best_model,
@@ -66,7 +68,6 @@ def log_to_mlflow():
             registered_model_name="Predictive_Maintenance_Model",
             signature=signature,
             input_example=input_example,
-            code_paths=["models/target_encodings.pkl"]
         )
 
         # Updating the staging of the model as 'Champion'

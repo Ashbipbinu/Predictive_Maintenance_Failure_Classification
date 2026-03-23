@@ -49,8 +49,8 @@ stages:
       size: 3547056
     - path: src/models/train_model.py
       hash: md5
-      md5: a14bbb531e1f9c68f370212e477bd005
-      size: 5725
+      md5: 1ff4c7635d7c36be55711d488ed61f80
+      size: 5726
     outs:
     - path: metrics.json
       hash: md5
@@ -58,8 +58,8 @@ stages:
       size: 835
     - path: models/scale.pkl
       hash: md5
-      md5: c1a6089cdc80493f4668b3881e4a8f97
-      size: 772
+      md5: a2499dc0ee24542c4a48ed527d783baa
+      size: 773
   predit_model:
     cmd: python -m src.models.predict_model
     deps:
@@ -69,8 +69,8 @@ stages:
       size: 886994
     - path: models/random_forest.pkl
       hash: md5
-      md5: d8c26b99fa3591e0e2cc7c28a9374b97
-      size: 34911685
+      md5: 28f74b659a81a111477827fc0cccf84c
+      size: 34911686
     - path: src/models/predict_model.py
       hash: md5
       md5: 9b659c2860c18e5a79ac356e88b64376
@@ -78,12 +78,12 @@ stages:
     outs:
     - path: confusion-failure_type.png
       hash: md5
-      md5: 52ba73ce86f647b2b7b3c30775375604
-      size: 35761
+      md5: 4300dff31f43f8403e050749d6be6dc1
+      size: 32116
     - path: confusion-target.png
       hash: md5
-      md5: 364949f8e866fdecd6547f26b58a77b2
-      size: 26139
+      md5: 3548344599a3432c905ad78da75abb4b
+      size: 23095
     - path: test_metric-failure_type.json
       hash: md5
       md5: 6c9c7a298cf85e1906f33dace7bda7db
@@ -97,16 +97,16 @@ stages:
     deps:
     - path: confusion-failure_type.png
       hash: md5
-      md5: 52ba73ce86f647b2b7b3c30775375604
-      size: 35761
+      md5: 4300dff31f43f8403e050749d6be6dc1
+      size: 32116
     - path: confusion-target.png
       hash: md5
-      md5: 364949f8e866fdecd6547f26b58a77b2
-      size: 26139
+      md5: 3548344599a3432c905ad78da75abb4b
+      size: 23095
     - path: src/models/log_models_dagshub.py
       hash: md5
-      md5: d9a436431145d98c5418c549db962953
-      size: 2962
+      md5: 99d0f94963e33e65af82b3e6b3a62679
+      size: 2998
     - path: test_metric-failure_type.json
       hash: md5
       md5: 6c9c7a298cf85e1906f33dace7bda7db

@@ -64,6 +64,19 @@ def promote_to_production(model_name):
         return False
 
     version = latest_versions[0].version
+    run_id = latest_versions[0].run_id
+    try:
+        # Check if the file exists in the expected MLflow internal path
+        # 'model/code/' is where code_paths usually end up
+        artifact_path = "models/code/target_encodings.pkl"
+        client.download_artifacts(run_id, artifact_path, dst_path="/tmp")
+        print(f"Verified: Encoder exists at {artifact_path}")
+        artifacts = client.list_artifacts(run_id)
+        for a in artifacts:
+            print(a.path)
+    except Exception as e:
+        print(f"Error: Encoder missing in Run {run_id}. Path might be wrong. {e}")
+        return False
     client.transition_model_version_stage(
         name=model_name,
         version=version,
@@ -84,8 +97,8 @@ def evaluate_and_transit_model():
         print(f"Error while loading / authenticating token: {e}")
 
     # Initializing the dagshub
-    repo_owner = (os.getenv("DAGSHUB_USER_NAME"))
-    repo_name = (os.getenv("DAGSHUB_REPO_NAME"))
+    repo_owner = os.getenv("DAGSHUB_USER_NAME")
+    repo_name = os.getenv("DAGSHUB_REPO_NAME")
     init_dagshub(repo_name, repo_owner)
 
     # Loading the test data

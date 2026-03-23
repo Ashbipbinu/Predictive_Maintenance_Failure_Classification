@@ -1,5 +1,6 @@
 [core]
     remote = origin
+    autostage = true
 ['remote "origin"']
     url = https://dagshub.com/Ashbipbinu/Predictive_Maintenance_Failure_Classification.dvc
     auth = basic

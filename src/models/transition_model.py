@@ -84,8 +84,8 @@ def evaluate_and_transit_model():
         print(f"Error while loading / authenticating token: {e}")
 
     # Initializing the dagshub
-    repo_owner = (os.getenv("DAGSHUB_USER_NAME"),)
-    repo_name = (os.getenv("DAGSHUB_REPO_NAME"),)
+    repo_owner = (os.getenv("DAGSHUB_USER_NAME"))
+    repo_name = (os.getenv("DAGSHUB_REPO_NAME"))
     init_dagshub(repo_name, repo_owner)
 
     # Loading the test data

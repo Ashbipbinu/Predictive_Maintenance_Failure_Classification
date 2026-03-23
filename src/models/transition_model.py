@@ -99,6 +99,7 @@ def evaluate_and_transit_model():
     # Initializing the dagshub
     repo_owner = os.getenv("DAGSHUB_USER_NAME")
     repo_name = os.getenv("DAGSHUB_REPO_NAME")
+    # Calling the init function
     init_dagshub(repo_name, repo_owner)
 
     # Loading the test data

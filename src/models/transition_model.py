@@ -68,7 +68,7 @@ def promote_to_production(model_name):
     try:
         # Check if the file exists in the expected MLflow internal path
         # 'model/code/' is where code_paths usually end up
-        artifact_path = "models/code/target_encodings.pkl"
+        artifact_path = "target_encodings.pkl"
         client.download_artifacts(run_id, artifact_path, dst_path="/tmp")
         print(f"Verified: Encoder exists at {artifact_path}")
         artifacts = client.list_artifacts(run_id)

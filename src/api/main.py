@@ -64,7 +64,7 @@ try:
     print(f"Downloading encoder from Run: {run_id}")
     local_dir = mlflow.artifacts.download_artifacts(
         run_id=run_id,
-        artifact_path="code/target_encodings.pkl",
+        artifact_path="target_encodings.pkl",
     )
 
     with open(local_dir, "rb") as file:

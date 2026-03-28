@@ -4,14 +4,23 @@ import mlflow.sklearn
 import os
 import pickle
 import numpy as np
+import logging
 
 from mlflow.tracking import MlflowClient
 from fastapi import FastAPI
 from pydantic import BaseModel
-
 from dotenv import load_dotenv
 
+
 load_dotenv()
+
+# --- Logging Configuration ---
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger(__name__)
 
 
 # Interface of the data
@@ -32,10 +41,9 @@ repo_name = os.getenv("DAGSHUB_REPO_NAME")
 # Loading the token from the environment
 try:
     dagshub.auth.add_app_token(token)
-    print("Success: Logging to Dagshub")
+    logger.info("Success: Logging to Dagshub")
 except Exception as e:
-    print(f"Error while loading / authenticating token: {repr(e)}")
-
+    logger.error(f"Error while loading / authenticating token: {repr(e)}")
 
 # Initialize DagsHub
 dagshub.init(
@@ -57,40 +65,44 @@ client = MlflowClient()
 encoder = None
 
 try:
-    print(f"Fetching production model details for: {model_name}")
+    logger.info(f"Fetching production model details for: {model_name}")
     latest_version = client.get_latest_versions(model_name, stages=["Production"])[0]
     run_id = latest_version.run_id
 
-    print(f"Downloading encoder from Run: {run_id}")
+    logger.info(f"Downloading encoder from Run: {run_id}")
     local_dir = mlflow.artifacts.download_artifacts(
         run_id=run_id,
         artifact_path="target_encodings.pkl",
     )
+    logger.info("Encoder loaded successfully!")
 
     with open(local_dir, "rb") as file:
         encoder = pickle.load(file)
-    print(" Encoder loaded successfully!")
+    logger.info("Encoder loaded successfully!")
 
 except Exception as e:
-    print(
-        f"Critical Error: Could not load encoder. Prediction will fail. Error: {e}"
+    logger.exception(
+        f"Critical Error: Could not load encoder. Prediction will fail. : {repr(e)}"
     )
 
 # Loading model
 try:
     model = mlflow.sklearn.load_model(model_uri=model_uri)
-    print("Model loaded successfully")
+    logger.info("Model loaded successfully")
 except Exception as e:
-    print(f"Loading model failed + {e}")
+    logger.exception(f"Loading model failed + {e}")
 
 
 @app.get("/")
 def read_root():
+    logger.info("Health check endpoint called")
     return {"status": "API is online", "model_version": model_uri}
 
 
 @app.post("/predict")
 def predict(data: MachineData):
+
+    logger.info("Received prediction request")
 
     data_dict = data.model_dump()
     df = pd.DataFrame([data_dict])
@@ -99,9 +111,10 @@ def predict(data: MachineData):
     try:
         prediction = model.predict(df)
         probs = model.predict_proba(df)
-        print("Model made prediction successfully")
+        logger.info("Model made prediction successfully")
     except Exception as e:
-        print(f"Error happened while predicting + {e}")
+        logger.exception(f"Error happened while predicting: {repr(e)}")
+        return {"error": "Prediction failed"}
 
     if prediction.ndim > 1:
         target = int(prediction.flatten()[0])

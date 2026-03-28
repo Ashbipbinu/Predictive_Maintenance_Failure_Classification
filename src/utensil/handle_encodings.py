@@ -13,7 +13,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def handle_target_encodings(y2_data: pd.Series) -> pd.Series:
+def handle_target_encodings(y2_data: pd.Series, save_dir: str = None) -> pd.Series:
     """
     Encodes categorical target labels and serializes the LabelEncoder object.
     """
@@ -31,7 +31,7 @@ def handle_target_encodings(y2_data: pd.Series) -> pd.Series:
     logger.info(f"Label mapping identified: {mapping}")
 
     # Define saving path
-    root_dir = os.getcwd()
+    root_dir = save_dir if save_dir else os.getcwd()
     folder = os.path.join(root_dir, "models")
     os.makedirs(folder, exist_ok=True)
     file_name = os.path.join(folder, "target_encodings.pkl")

@@ -14,7 +14,7 @@ class DummyMultiOutputModel:
         return [self.target_probs, self.failure_probs]
 
 
-@pytest.mark.model_production
+@pytest.mark.model
 def test_model_production_pass():
     # Sample test data
     data = pd.DataFrame(
@@ -26,7 +26,7 @@ def test_model_production_pass():
         }
     )
 
-    # ✅ Perfect predictions
+    # Perfect predictions
     target_probs = np.array(
         [
             [0.1, 0.9],  # 1
@@ -55,14 +55,13 @@ def test_model_production_pass():
         model=model,
         test_df=data,
         columns=["target", "failure_type"],
-        threshold=0.5,
         gate_threshold=0.95,
     )
 
     assert result is True
 
 
-@pytest.mark.model_production
+@pytest.mark.model
 def test_model_production_fail():
     data = pd.DataFrame(
         {
@@ -86,7 +85,6 @@ def test_model_production_fail():
         model=model,
         test_df=data,
         columns=["target", "failure_type"],
-        threshold=0.5,
         gate_threshold=0.95,
     )
 

@@ -109,3 +109,36 @@ jobs:
             DAGSHUB_REPO_NAME: ${{ secrets.DAGSHUB_REPO_NAME }}
           run: |
               python src/models/transition_model.py
+
+    build-and-deploy:
+      needs: production
+      runs-on: ubuntu-latest
+      permissions:
+        contents: read
+        packages: write
+
+      steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+
+          - name: Log in to GHCR
+            uses: docker/login-action@v3
+            with:
+              registry: ghcr.io
+              username: ${{ github.actor }}
+              password: ${{ secrets.GITHUB_TOKEN }}
+          
+          - name: Set lowercase image name
+            run: |
+              echo "IMAGE_NAME=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+          - name: Build and push Docker image
+            uses: docker/build-push-action@v5
+            with:
+              context: .
+              push: true
+              tags: ghcr.io/${{ env.IMAGE_NAME }}:latest
+
+          - name: Trigger Render Deploy
+            run: |
+              curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"

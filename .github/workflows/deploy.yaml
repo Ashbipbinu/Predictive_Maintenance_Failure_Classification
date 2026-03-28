@@ -31,5 +31,4 @@ jobs:
         with:
           context: .
           push: true
-          # Using the lowercase environment variable we just created
           tags: ghcr.io/${{ env.IMAGE_NAME }}:latest

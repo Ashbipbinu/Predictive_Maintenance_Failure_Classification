@@ -139,6 +139,6 @@ jobs:
             push: true
             tags: ghcr.io/${{ env.IMAGE_NAME }}:latest
 
-        - name: Trigger Render Deployment
+        - name: Trigger Render For Deployment
           run: |
             curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"

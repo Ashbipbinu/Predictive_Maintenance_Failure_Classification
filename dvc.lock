@@ -49,17 +49,17 @@ stages:
       size: 3547056
     - path: src/models/train_model.py
       hash: md5
-      md5: 59e9ca329dfab6eefcea469c8638108c
-      size: 7849
+      md5: 9ced69f0263612ccc383366ccbb32809
+      size: 8053
     outs:
     - path: metrics.json
       hash: md5
-      md5: e6009999fd7c257c372460eda544ef0f
-      size: 835
+      md5: 5738e480bb0ace8bb17a53917e3348e5
+      size: 881
     - path: models/scale.pkl
       hash: md5
-      md5: a2499dc0ee24542c4a48ed527d783baa
-      size: 773
+      md5: c1a6089cdc80493f4668b3881e4a8f97
+      size: 772
   predit_model:
     cmd: python -m src.models.predict_model
     deps:
@@ -69,8 +69,8 @@ stages:
       size: 886994
     - path: models/random_forest.pkl
       hash: md5
-      md5: 28f74b659a81a111477827fc0cccf84c
-      size: 34911686
+      md5: d8c26b99fa3591e0e2cc7c28a9374b97
+      size: 34911685
     - path: src/models/predict_model.py
       hash: md5
       md5: b68838618b9aeb5e4be53423fc9e4427
@@ -78,12 +78,12 @@ stages:
     outs:
     - path: confusion-failure_type.png
       hash: md5
-      md5: 0f036c5d3e3913d78801cd5f995ad1e3
-      size: 31168
+      md5: dba7e4e0146f8b6251386a9f680245cb
+      size: 34516
     - path: confusion-target.png
       hash: md5
-      md5: 0c33ab0b4a2a0ee5dbb7ea04f396d647
-      size: 21270
+      md5: 85b24470d9e8cbacb5ae520703b40a2f
+      size: 23523
     - path: test_metric-failure_type.json
       hash: md5
       md5: 6c9c7a298cf85e1906f33dace7bda7db
@@ -97,12 +97,12 @@ stages:
     deps:
     - path: confusion-failure_type.png
       hash: md5
-      md5: 0f036c5d3e3913d78801cd5f995ad1e3
-      size: 31168
+      md5: dba7e4e0146f8b6251386a9f680245cb
+      size: 34516
     - path: confusion-target.png
       hash: md5
-      md5: 0c33ab0b4a2a0ee5dbb7ea04f396d647
-      size: 21270
+      md5: 85b24470d9e8cbacb5ae520703b40a2f
+      size: 23523
     - path: src/models/log_models_dagshub.py
       hash: md5
       md5: 9dec427243d93d191f97f713a267c6cf

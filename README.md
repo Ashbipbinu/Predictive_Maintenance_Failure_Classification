@@ -132,5 +132,3 @@ Run the API locally:
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
-# Predictive_Maintenance_Failure_Classification
->>>>>>> 23777f889ef7cf04f1300ca721b5b73b3289602b

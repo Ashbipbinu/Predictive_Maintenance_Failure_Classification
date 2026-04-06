@@ -46,54 +46,19 @@ Recall Optimization: Improved through threshold tuning (set to 0.25) to increase
 
 Baseline Improvement: Distance-based algorithms (KNN) saw a 15% accuracy boost following the implementation of SMOTE and StandardScaler.
 
-Project Overview
-In industrial settings, unexpected machine failure leads to significant financial loss and safety risks. This project solves the problem of unplanned downtime by providing a high-precision classification system that monitors sensor inputs—such as temperature, torque, and tool wear—to predict binary failure status and specific failure types.
+## System Architecture
+Data Pipeline: DVC manages data versioning, ensuring reproducibility across different training environments.
 
-Key Objectives
-Predictive Analysis: Early detection of machine failure (Binary Classification).
+Training Workflow: Automated Python scripts handle preprocessing, feature scaling, and model registration via MLflow.
 
-Failure Diagnostics: Identification of the specific type of failure (Multi-class Classification).
+Inference API: A FastAPI service provides endpoints for both single and batch predictions.
 
-Production Readiness: Delivering a scalable, containerized API with automated CI/CD and experiment tracking.
+CI/CD: GitHub Actions triggers on every push to run Pytest suites and build a Docker image to ensure environment consistency.
 
-Technical Stack
-Machine Learning & Data Science
-Languages: Python (Pandas, NumPy)
+## API Documentation & Usage
+The inference service is live and can be accessed via the interactive Swagger UI. The API returns both the predicted class and the associated probability, along with MLflow metadata for model lineage.
 
-Modeling: Scikit-learn (Random Forest, KNN), XGBoost
-
-Imbalance Handling: SMOTE (Synthetic Minority Over-sampling Technique)
-
-Preprocessing: StandardScaler, Label Encoding
-
-MLOps & Infrastructure
-Experiment Tracking: MLflow (hosted via DagsHub)
-
-Data Versioning: DVC (Data Version Control)
-
-API Framework: FastAPI with Pydantic validation
-
-Containerization: Docker
-
-CI/CD: GitHub Actions (Automated testing and smoke tests)
-
-Deployment: Render
-
-## Performance & Evaluation
-The system was evaluated through extensive A/B testing across multiple algorithms. Random Forest was selected as the production model due to its superior handling of non-linear relationships and robust performance under class imbalance.
-
-## Metrics Summary
-F1-Score: 99.46% (Achieved for both binary and multi-class tasks)
-
-Recall Optimization: Improved through threshold tuning (set to 0.25) to increase sensitivity to rare failure events.
-
-Baseline Improvement: Distance-based algorithms (KNN) saw a 15% accuracy boost following the implementation of SMOTE and StandardScaler.
-
-Model Comparison
-Model	Precision	Recall	F1-Score
-Random Forest	0.99	0.99	99.46%
-XGBoost	0.98	0.97	97.50%
-KNN (Baseline)	0.82	0.79	80.50%
+    Live Endpoint: https://predictive-maintenance-failure.onrender.com/docs
 
 ## Project Organization
 ------------

@@ -13,7 +13,7 @@ Failure Diagnostics: Identification of the specific type of failure (Multi-class
 
 Production Readiness: Delivering a scalable, containerized API with automated CI/CD and experiment tracking.
 
-Technical Stack
+## Technical Stack
 Machine Learning & Data Science
 Languages: Python (Pandas, NumPy)
 
@@ -23,7 +23,7 @@ Imbalance Handling: SMOTE (Synthetic Minority Over-sampling Technique)
 
 Preprocessing: StandardScaler, Label Encoding
 
-MLOps & Infrastructure
+## MLOps & Infrastructure
 Experiment Tracking: MLflow (hosted via DagsHub)
 
 Data Versioning: DVC (Data Version Control)
@@ -45,10 +45,6 @@ F1-Score: 99.46% (Achieved for both binary and multi-class tasks)
 Recall Optimization: Improved through threshold tuning (set to 0.25) to increase sensitivity to rare failure events.
 
 Baseline Improvement: Distance-based algorithms (KNN) saw a 15% accuracy boost following the implementation of SMOTE and StandardScaler.
-
-Gemini said
-Predictive Maintenance Failure Classification
-This repository contains an end-to-end machine learning system designed to predict and classify equipment failures before they occur. By leveraging industrial sensor data, the system identifies potential breakdowns, allowing for proactive maintenance and reduced operational downtime.
 
 Project Overview
 In industrial settings, unexpected machine failure leads to significant financial loss and safety risks. This project solves the problem of unplanned downtime by providing a high-precision classification system that monitors sensor inputs—such as temperature, torque, and tool wear—to predict binary failure status and specific failure types.

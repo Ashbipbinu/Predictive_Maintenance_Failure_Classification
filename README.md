@@ -1,8 +1,50 @@
-<<<<<<< HEAD
-Predictive_Maintenance
+Predictive Maintenance Failure Classification
 ==============================
 
-A short description of the project.
+This repository contains an end-to-end machine learning system designed to predict and classify equipment failures before they occur. By leveraging industrial sensor data, the system identifies potential breakdowns, allowing for proactive maintenance and reduced operational downtime.
+
+## Project Overview
+In industrial settings, unexpected machine failure leads to significant financial loss and safety risks. This project solves the problem of unplanned downtime by providing a high-precision classification system that monitors sensor inputs—such as temperature, torque, and tool wear—to predict binary failure status and specific failure types.
+
+## Key Objectives
+Predictive Analysis: Early detection of machine failure (Binary Classification).
+
+Failure Diagnostics: Identification of the specific type of failure (Multi-class Classification).
+
+Production Readiness: Delivering a scalable, containerized API with automated CI/CD and experiment tracking.
+
+Technical Stack
+Machine Learning & Data Science
+Languages: Python (Pandas, NumPy)
+
+Modeling: Scikit-learn (Random Forest, KNN), XGBoost
+
+Imbalance Handling: SMOTE (Synthetic Minority Over-sampling Technique)
+
+Preprocessing: StandardScaler, Label Encoding
+
+MLOps & Infrastructure
+Experiment Tracking: MLflow (hosted via DagsHub)
+
+Data Versioning: DVC (Data Version Control)
+
+API Framework: FastAPI with Pydantic validation
+
+Containerization: Docker
+
+CI/CD: GitHub Actions (Automated testing and smoke tests)
+
+Deployment: Render
+
+## Performance & Evaluation
+The system was evaluated through extensive A/B testing across multiple algorithms. Random Forest was selected as the production model due to its superior handling of non-linear relationships and robust performance under class imbalance.
+
+Metrics Summary
+F1-Score: 99.46% (Achieved for both binary and multi-class tasks)
+
+Recall Optimization: Improved through threshold tuning (set to 0.25) to increase sensitivity to rare failure events.
+
+Baseline Improvement: Distance-based algorithms (KNN) saw a 15% accuracy boost following the implementation of SMOTE and StandardScaler.
 
 Project Organization
 ------------

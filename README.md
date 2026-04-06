@@ -61,13 +61,13 @@ The inference service is live and can be accessed via the interactive Swagger UI
     https://predictive-maintenance-failure.onrender.com/docs
 
 ## Installation & Setup
-# Prerequisites
+## Prerequisites
 
 Python 3.12+
 
 Docker (Optional, for containerized execution)
 
-# Steps
+## Steps
 Clone the repository:
         
         git clone https://github.com/Ashbipbinu/Predictive_Maintenance_Failure_Classification.git

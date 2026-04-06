@@ -6,6 +6,7 @@ from src.utensil.save_file import save_file
 from src.utensil.check_class_imabalance import check_class_imbalance
 from src.utensil.handle_data_split import handle_data_split
 from src.utensil.handle_encodings import handle_target_encodings
+from src.utensil.handle_imbalance import handle_imbalance
 
 
 @pytest.mark.data
@@ -38,13 +39,12 @@ def test_null_vals(preprocessing_data):
 
 
 @pytest.mark.data
-def test_data_saved(tmp_path):
+def test_data_saved(tmp_path, create_demo_data):
     d = tmp_path / "data" / "interim"
     d.mkdir(parents=True)
     file_path = d / "cleaned_df.csv"
 
-    data = {'target': [0, 1], 'failure_type': ['No Failure', 'Power Failure']}
-    df_dummy = pd.DataFrame(data)
+    df_dummy = pd.DataFrame(create_demo_data)
 
     save_file(str(file_path), df_dummy)
 
@@ -57,8 +57,8 @@ def test_data_saved(tmp_path):
 
 
 @pytest.mark.data
-def test_output_type(preprocessing_data):
-    assert isinstance(preprocessing_data, pd.DataFrame)
+def test_output_type(create_demo_data):
+    assert isinstance(create_demo_data, pd.DataFrame)
 
 
 @pytest.mark.data
@@ -98,4 +98,8 @@ def test_encodings(create_demo_data, tmp_path):
 
 @pytest.mark.data
 def test_data_imbalance(create_demo_data):
-    pass
+    data = pd.DataFrame(create_demo_data)
+
+    result = handle_imbalance(data)
+
+    assert isinstance(result, pd.DataFrame)

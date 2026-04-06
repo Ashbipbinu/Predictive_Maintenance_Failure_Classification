@@ -42,12 +42,22 @@ stages:
         cache: false
     - test_metric-failure_type.json:
         cache: false
-  
+
+  eda_visualization:
+      cmd: python -m src.visualization.visualize
+      deps:
+        - src/visualization/visualize.py
+        - src/utensil/load_config.py
+        - config.yaml
+        - data/interim/cleaned_df.csv
+      outs:
+        - reports/figures
+
   log_results:
-    cmd: python -m src.models.log_models_dagshub
-    deps:
-    - confusion-failure_type.png
-    - confusion-target.png
-    - test_metric-failure_type.json
-    - test_metric-target.json
-    - src/models/log_models_dagshub.py
+      cmd: python -m src.models.log_models_dagshub
+      deps:
+      - confusion-failure_type.png
+      - confusion-target.png
+      - test_metric-failure_type.json
+      - test_metric-target.json
+      - src/models/log_models_dagshub.py

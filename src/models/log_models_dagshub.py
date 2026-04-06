@@ -6,10 +6,13 @@ import mlflow
 import mlflow.sklearn
 import os
 import logging
+import matplotlib.pyplot as plt
+
 from mlflow.models import infer_signature
 from mlflow.tracking import MlflowClient
-from src.utensil.load_config import load_config
 from dotenv import load_dotenv
+
+from src.utensil.load_config import load_config
 
 # --- Logging Configuration ---
 logging.basicConfig(
@@ -64,11 +67,12 @@ def log_to_mlflow():
                 else:
                     logger.warning(f"Metric file {metric_file} not found. Skipping.")
 
-                matrix_file = f"confusion-{col}.png"
-                if os.path.exists(matrix_file):
-                    mlflow.log_artifact(matrix_file)
+                save_dir = "reports/figures"
+                if os.path.exists(save_dir):
+                    plt.savefig(save_dir / f"confusion-{col}.png")
+                    mlflow.log_artifact(save_dir / f"confusion-{col}.png")
                 else:
-                    logger.warning(f"Confusion matrix image {matrix_file} not found.")
+                    logger.warning(f"Confusion matrix image {save_dir} not found.")
 
             # Log Code Version Tag
             mlflow.set_tag("dvc_repro", "true")

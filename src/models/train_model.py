@@ -9,7 +9,7 @@ import logging
 from dotenv import load_dotenv
 
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import f1_score, recall_score, precision_score
 from mlflow.models import infer_signature
 
 from src.utensil.load_models import load_ml_models
@@ -32,8 +32,16 @@ load_dotenv()
 def evaluate_multioutput(y_true, y_pred):
     metrics = {}
     for i, col in enumerate(["target", "failure_type"]):
-        metrics[f"{col}_accuracy"] = accuracy_score(y_true.iloc[:, i], y_pred[:, i])
+
         metrics[f"{col}_f1_weighted"] = f1_score(
+            y_true.iloc[:, i], y_pred[:, i], average="weighted"
+        )
+
+        metrics[f"{col}_recall_weighted"] = recall_score(
+            y_true.iloc[:, i], y_pred[:, i], average="weighted"
+        )
+
+        metrics[f"{col}_f1_weighted"] = precision_score(
             y_true.iloc[:, i], y_pred[:, i], average="weighted"
         )
 

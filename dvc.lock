@@ -105,8 +105,8 @@ stages:
       size: 23523
     - path: src/models/log_models_dagshub.py
       hash: md5
-      md5: 9dec427243d93d191f97f713a267c6cf
-      size: 5256
+      md5: 18ef8a211d5f93e7bf7a90e42a28ea08
+      size: 5369
     - path: test_metric-failure_type.json
       hash: md5
       md5: 6c9c7a298cf85e1906f33dace7bda7db
@@ -115,3 +115,28 @@ stages:
       hash: md5
       md5: 44d75d255f20b7dc53c96e2eb4f7c24d
       size: 122
+  eda_visualization:
+    cmd: python -m src.visualization.visualize
+    deps:
+    - path: config.yaml
+      hash: md5
+      md5: eebdaaa47f8ad1b93fdcdd6f853c1823
+      size: 503
+    - path: data/interim/cleaned_df.csv
+      hash: md5
+      md5: 5ee5b267a0a7100c6b098a03e5ff30b8
+      size: 5311405
+    - path: src/utensil/load_config.py
+      hash: md5
+      md5: 0ababdeac7e8ea146aa44c4394743805
+      size: 152
+    - path: src/visualization/visualize.py
+      hash: md5
+      md5: 4da745412edd6d6360b09b23dd6b62a7
+      size: 6112
+    outs:
+    - path: reports/figures
+      hash: md5
+      md5: c5fb896c7342386a287bc2cc128cde93.dir
+      size: 311691
+      nfiles: 9

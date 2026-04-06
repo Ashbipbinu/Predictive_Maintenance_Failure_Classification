@@ -56,9 +56,33 @@ Inference API: A FastAPI service provides endpoints for both single and batch pr
 CI/CD: GitHub Actions triggers on every push to run Pytest suites and build a Docker image to ensure environment consistency.
 
 ## API Documentation & Usage
-The inference service is live and can be accessed via the interactive Swagger UI. The API returns both the predicted class and the associated probability, along with MLflow metadata for model lineage.
+The inference service is live and can be accessed via the interactive Swagger UI. The API returns both the predicted class and the associated probability, along with MLflow metadata for model lineage.  Live Endpoint:
 
-    Live Endpoint: https://predictive-maintenance-failure.onrender.com/docs
+    https://predictive-maintenance-failure.onrender.com/docs
+
+## Installation & Setup
+# Prerequisites
+
+Python 3.12+
+
+Docker (Optional, for containerized execution)
+
+# Steps
+Clone the repository:
+        
+        git clone https://github.com/Ashbipbinu/Predictive_Maintenance_Failure_Classification.git
+
+Install dependencies:
+
+    pip install -r requirements.txt
+
+Reproduce the pipeline:
+
+    dvc repro
+
+Run the API locally:
+
+    uvicorn src.api.main:app --reload
 
 ## Project Organization
 ------------
